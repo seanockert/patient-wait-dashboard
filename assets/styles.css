@@ -1,0 +1,246 @@
+:root {
+  --border-radius-round: 30rem;
+  --border-radius: 0.5rem;
+  --color-blue-light: #e5fcff;
+  --color-primary-0: #4b3881;
+  --color-primary-100: #f3f0fc;
+  --color-primary-20: #774b9e;
+  --color-primary-30: #9059bf;
+  --color-primary-40: #a469d7;
+  --color-yellow-100: #fffea9;
+  --color-level-low: #a9ffb2;
+  --color-level-medium: #fce58f;
+  --color-level-high: #ffaa8e;
+  --color-level-critical: #ff6cbd;
+  --easing-base: cubic-bezier(1, -0.16, 0.06, 1.35);
+  --font-size-base: calc(1rem + 1vw);
+  --font-size-large: calc(1rem + 3rvw);
+  --font-size-largest: calc(3rem + 5vw);
+  --font-weight-base: 600;
+  --font-weight-strong: 700;
+  --size-2x: 1.5rem;
+  --size-4x: 3rem;
+  --size-base: 0.75rem;
+  --size-half: 0.375rem;
+  --size-quarter: 0.1875rem;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  overflow-wrap: break-word;
+}
+
+html,
+body {
+  height: 100vh;
+  padding: 0;
+  width: 100vw;
+}
+
+body {
+  background: var(--color-primary-0);
+  color: var(--color-primary-100);
+  display: grid;
+  font-family: 'Open Sans', sans-serif;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-base);
+  line-height: 1.3;
+}
+
+h2,
+h3 {
+  font-size: var(--font-size-largest);
+  font-weight: var(--font-weight-strong);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+h3 {
+  font-size: var(--font-size-large);
+}
+
+strong {
+  color: var(--color-yellow-100);
+  font-weight: var(--font-weight-strong);
+}
+
+button {
+  align-items: center;
+  appearance: none;
+  background: var(--color-primary-30);
+  border-radius: var(--border-radius);
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  font-weight: var(--font-weight-strong);
+  font: inherit;
+  justify-content: center;
+  line-height: 1;
+  padding: var(--size-base);
+  transition: all 0.15s ease-out;
+}
+
+button.negative {
+  position: relative;
+}
+
+button:hover,
+button:focus {
+  background: var(--color-primary-40);
+}
+
+button:active {
+  transform: scale(0.9);
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.icon {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 3;
+  stroke: currentColor;
+}
+
+/* Inline and Stack layout */
+[class^='inline'],
+[class*=' inline'],
+[class^='stack'],
+[class*=' stack'] {
+  display: flex;
+  gap: var(--size-base);
+}
+
+[class^='inline'],
+[class*=' inline'] {
+  align-items: center;
+  justify-content: flex-start;
+}
+
+[class^='stack'],
+[class*=' stack'] {
+  flex-direction: column;
+}
+
+[class^='inline'] > [class^='stack'] {
+  flex: 1;
+}
+
+.inline-zero,
+.stack-zero {
+  display: inline-flex;
+  gap: 0;
+}
+
+.inline-quarter,
+.stack-quarter {
+  gap: var(--size-quarter);
+}
+
+.inline-half,
+.stack-half {
+  gap: var(--size-half);
+}
+
+.inline-2x,
+.stack-2x {
+  gap: var(--size-2x);
+}
+
+.inline-between {
+  justify-content: space-between;
+}
+
+[hidden],
+[v-cloak] {
+  display: none !important;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 0.7fr 1.3fr;
+  grid-template-areas:
+    '. .'
+    '. .';
+}
+
+.wrapper-admin {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.wrapper > * {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  padding: var(--size-2x);
+  text-align: center;
+}
+
+.wait-time h2 {
+  color: var(--color-yellow-100);
+}
+
+.patient-icons {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(3rem, 1fr));
+  grid-template-rows: repeat(auto, auto);
+  list-style: none;
+  padding: 0;
+}
+
+.patient-icons .low {
+  color: var(--color-level-low);
+}
+
+.patient-icons .medium {
+  color: var(--color-level-medium);
+}
+
+.patient-icons .high {
+  color: var(--color-level-high);
+}
+
+.patient-icons .critical {
+  color: var(--color-level-critical);
+}
+
+.admin {
+  background-color: #fff;
+  border-radius: var(--border-radius);
+  color: var(--color-primary-0);
+  left: 50%;
+  padding: var(--size-2x);
+  position: absolute;
+  top: 50%;
+  transform: translate3d(-50%, -50%, 0);
+}
+
+.controls-list > div {
+  text-align: center;
+  text-transform: capitalize;
+  white-space: nowrap;
+  width: calc(12rem + 10vw);
+}
+
+.controls-list button {
+  aspect-ratio: 1;
+  border-radius: var(--border-radius-round);
+  font-size: var(--font-size-large);
+  height: 3rem;
+}
+
+@media (max-width: 40rem) {
+  .wrapper {
+    display: block;
+  }
+}
