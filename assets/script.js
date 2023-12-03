@@ -4,20 +4,21 @@ const serverUrl = 'ws://192.168.1.2:8090'
 
 function Dashboard(props) {
   return {
+    busyLevel: 5,
     currentTime: 0,
     hoursMax: 8,
-    patients: [],
-    showAdmin: false,
-    socket: null,
-    storageKey: 'ed_dashboard',
-    waitTime: 0,
-    waitTimeAccuracy: 40,
     levels: [
       { id: 0, label: 'critical', delay: 40 },
       { id: 1, label: 'high', delay: 30 },
       { id: 2, label: 'medium', delay: 20 },
       { id: 3, label: 'low', delay: 10 }
     ],
+    patients: [],
+    showAdmin: false,
+    socket: null,
+    storageKey: 'ed_dashboard',
+    waitTime: 0,
+    waitTimeAccuracy: 40,
     mounted() {
       this.initDashboard()
       this.initWebsocket()
@@ -85,10 +86,10 @@ function Dashboard(props) {
 
       return new Intl.DateTimeFormat('en-AU', format).format(date)
     },
-    getWaitTime(time1, time2, hours = false) {
+    getWaitTime(time1, time2, inHours = false) {
       const timeDifference = Math.abs(time1 - time2)
 
-      if (hours) {
+      if (inHours) {
         // Round to closest hour up to hoursMax
         const hoursDifference = Math.round(timeDifference / (1000 * 60 * 60))
         return hoursDifference > this.hoursMax
@@ -139,11 +140,14 @@ function Dashboard(props) {
         return acc
       }, 0)
 
+      const busyLevel = (totalWaitTime / 60 / this.hoursMax) * 100
+      this.busyLevel = busyLevel > 100 ? 100 : busyLevel
+
       this.waitTime = currentTime.setMinutes(
         currentTime.getMinutes() + totalWaitTime
       )
     },
-    patientsByLevel(level) {
+    getPatientsByLevel(level) {
       return this.patients.filter((patient) => patient.level === level).length
     },
     handleStorageChange(event) {

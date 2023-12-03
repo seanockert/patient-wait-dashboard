@@ -19,13 +19,13 @@
             <button
               @click="updatePatient(level.id, true)"
               class="button"
-              :disabled="patientsByLevel(level.id) === 0"
+              :disabled="getPatientsByLevel(level.id) === 0"
             >
               <svg height="24" viewBox="0 0 24 24" class="icon">
                 <path d="M19.5 12h-15" />
               </svg>
             </button>
-            {{ level.label }} ({{ patientsByLevel(level.id) }})
+            {{ level.label }} ({{ getPatientsByLevel(level.id) }})
             <button @click="updatePatient(level.id)" class="button">
               <svg height="24" viewBox="0 0 24 24" class="icon">
                 <path d="M12 6v12m6-6H6" />
@@ -33,6 +33,8 @@
             </button>
           </div>
         </div>
+
+        <a href="/">View dashboard</a>
       </div>
     </div>
   </body>

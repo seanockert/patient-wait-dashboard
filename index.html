@@ -25,10 +25,26 @@
             wait
           </div>
         </template>
+
+        <div class="meter-wrapper" :style="{ '--x': busyLevel + '%' }">
+          <div class="meter"></div>
+          <svg
+            class="meter-marker"
+            width="50"
+            height="50"
+            viewBox="-50 -50 300 300"
+          >
+            <polygon
+              stroke-linejoin="round"
+              stroke-linecap="round"
+              points="100,0 0,200 200,200"
+            />
+          </svg>
+        </div>
       </div>
 
       <div class="wait-time stack-half">
-        <div v-if="getWaitTime(waitTime, currentTime, hours) === 0">
+        <div v-if="getWaitTime(waitTime, currentTime, true) === 0">
           Please visit the counter
         </div>
         <template v-else>
@@ -77,13 +93,13 @@
             <button
               @click="updatePatient(level.id, true)"
               class="button"
-              :disabled="patientsByLevel(level.id) === 0"
+              :disabled="getPatientsByLevel(level.id) === 0"
             >
               <svg height="24" viewBox="0 0 24 24" class="icon">
                 <path d="M19.5 12h-15" />
               </svg>
             </button>
-            {{ level.label }} ({{ patientsByLevel(level.id) }})
+            {{ level.label }} ({{ getPatientsByLevel(level.id) }})
             <button @click="updatePatient(level.id)" class="button">
               <svg height="24" viewBox="0 0 24 24" class="icon">
                 <path d="M12 6v12m6-6H6" />

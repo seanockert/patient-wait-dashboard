@@ -184,12 +184,6 @@ button:disabled {
     '. .';
 }
 
-.wrapper-admin {
-  align-items: center;
-  display: flex;
-  justify-content: center;
-}
-
 .wrapper > * {
   align-items: center;
   display: flex;
@@ -231,6 +225,7 @@ button:disabled {
   border-radius: var(--border-radius);
   color: var(--color-primary-0);
   left: 50%;
+  min-width: 90%;
   padding: var(--size-2x);
   position: absolute;
   top: 50%;
@@ -249,6 +244,40 @@ button:disabled {
   border-radius: var(--border-radius-round);
   font-size: var(--font-size-large);
   height: 3rem;
+}
+
+.meter-wrapper {
+  --x: 5%;
+  position: relative;
+  width: 100%;
+}
+
+.meter {
+  background: linear-gradient(
+    90deg,
+    var(--color-level-low) 0%,
+    var(--color-level-low) 25%,
+    var(--color-level-medium) 25%,
+    var(--color-level-medium) 50%,
+    var(--color-level-high) 50%,
+    var(--color-level-high) 75%,
+    var(--color-level-critical) 75%
+  );
+  border-radius: var(--border-radius);
+  height: 2rem;
+}
+
+.meter-marker {
+  left: var(--x);
+  position: absolute;
+  top: 0.5rem;
+  transform: translateX(-50%);
+}
+
+.meter-marker polygon {
+  fill: #fff;
+  stroke: var(--color-primary-0);
+  stroke-width: 16;
 }
 
 @media (max-width: 40rem) {
