@@ -82,6 +82,10 @@ func main() {
 		}
 	})
 
+	http.HandleFunc("/admin", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, "admin.html")
+	})
+
 	// Handle incoming WebSocket messages
 	go handleMessages()
 

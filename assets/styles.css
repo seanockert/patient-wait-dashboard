@@ -1,3 +1,15 @@
+@font-face {
+  font-family: 'Open Sans';
+  src: url('open_sans_600.woff') format('woff');
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  src: url('open_sans_700.woff') format('woff');
+  font-weight: 700;
+}
+
 :root {
   --border-radius-round: 30rem;
   --border-radius: 0.5rem;

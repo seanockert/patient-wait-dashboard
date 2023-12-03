@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Patient Wait Admin</title>
+    <link href="/assets/styles.css" rel="stylesheet" />
+    <script src="/assets/script.js" type="module"></script>
+  </head>
+  <body>
+    <div v-scope="Dashboard()" @vue:mounted="mounted" class="wrapper" v-cloak>
+      <div class="admin stack-2x">
+        <div class="stack-half">
+          <h3>Update Patients ({{ patients.length }})</h3>
+          Estimated wait time: {{ getWaitTime(waitTime, currentTime) }}
+        </div>
+        <div class="stack controls-list">
+          <div v-for="level in levels" :key="level.id" class="inline-between">
+            <button
+              @click="updatePatient(level.id, true)"
+              class="button"
+              :disabled="patientsByLevel(level.id) === 0"
+            >
+              <svg height="24" viewBox="0 0 24 24" class="icon">
+                <path d="M19.5 12h-15" />
+              </svg>
+            </button>
+            {{ level.label }} ({{ patientsByLevel(level.id) }})
+            <button @click="updatePatient(level.id)" class="button">
+              <svg height="24" viewBox="0 0 24 24" class="icon">
+                <path d="M12 6v12m6-6H6" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

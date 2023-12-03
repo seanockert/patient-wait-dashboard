@@ -4,13 +4,6 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Patient Wait Dashboard</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600;700&display=swap"
-      rel="stylesheet"
-    />
-
     <link href="/assets/styles.css" rel="stylesheet" />
     <script src="/assets/script.js" type="module"></script>
   </head>
@@ -22,19 +15,20 @@
       </div>
 
       <div class="level stack-half">
-        <div v-if="periodInHours(waitTime, currentTime) < 1">
+        <div v-if="getWaitTime(waitTime, currentTime, true) < 1">
           Less than 1 hour wait
         </div>
         <template v-else>
-          <h2>{{ periodInHours(waitTime, currentTime) }}</h2>
+          <h2>{{ getWaitTime(waitTime, currentTime, true) }}</h2>
           <div>
-            hour{{ periodInHours(waitTime, currentTime) === 1 ? '' : 's' }} wait
+            hour{{ getWaitTime(waitTime, currentTime, true) === 1 ? '' : 's' }}
+            wait
           </div>
         </template>
       </div>
 
       <div class="wait-time stack-half">
-        <div v-if="periodInHours(waitTime, currentTime) === 0">
+        <div v-if="getWaitTime(waitTime, currentTime, hours) === 0">
           Please visit the counter
         </div>
         <template v-else>
@@ -75,7 +69,7 @@
 
       <div v-if="showAdmin" class="admin stack-2x">
         <div class="inline-between">
-          <h3>Edit Patients</h3>
+          <h3>Update Patients</h3>
           <button @click="showAdmin = false">Close</button>
         </div>
         <div class="stack controls-list">

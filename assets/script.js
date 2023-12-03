@@ -85,13 +85,24 @@ function Dashboard(props) {
 
       return new Intl.DateTimeFormat('en-AU', format).format(date)
     },
-    periodInHours(time1, time2) {
-      // Round to closest hour up to hoursMax
+    getWaitTime(time1, time2, hours = false) {
       const timeDifference = Math.abs(time1 - time2)
-      const hoursDifference = Math.round(timeDifference / (1000 * 60 * 60))
-      return hoursDifference > this.hoursMax
-        ? `${this.hoursMax}+`
-        : hoursDifference
+
+      if (hours) {
+        // Round to closest hour up to hoursMax
+        const hoursDifference = Math.round(timeDifference / (1000 * 60 * 60))
+        return hoursDifference > this.hoursMax
+          ? `${this.hoursMax}+`
+          : hoursDifference
+      } else {
+        // Return hours and minutes
+        const hours = Math.floor(timeDifference / (1000 * 60 * 60))
+        const minutes = Math.floor(
+          (timeDifference % (1000 * 60 * 60)) / (1000 * 60)
+        )
+
+        return `${hours} hr ${minutes} min`
+      }
     },
     updatePatient(level = 2, remove = false) {
       if (remove) {
