@@ -4,6 +4,10 @@ A patient wait dashboard for displaying in a hospital Emergency Department. Show
 
 Hosted locally on a Go webserver. Uses a websocket to update all dashboards on the local network when the patient count changes.
 
+## Demo (dashboard only)
+
+https://so-ed-dashboard.surge.sh
+
 ## Run the web server with Go
 
 If you have the Go language installed, start the webserver directly with:
