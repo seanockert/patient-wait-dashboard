@@ -8,6 +8,9 @@ Hosted locally on a Go webserver. Uses a websocket to update all dashboards on t
 
 https://so-ed-dashboard.surge.sh
 
+<img width="1134" alt="Screenshot 2023-12-03 at 11 12 40 pm" src="https://github.com/seanockert/patient-wait-dashboard/assets/574163/28232849-f995-4a42-92af-9a133871f366">
+
+
 ## Run the web server with Go
 
 If you have the Go language installed, start the webserver directly with:
