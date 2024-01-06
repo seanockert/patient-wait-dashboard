@@ -1,13 +1,15 @@
 @font-face {
+  font-display: swap;
   font-family: 'Open Sans';
-  src: url('open_sans_600.woff') format('woff');
   font-weight: 600;
+  src: url('open_sans_600.woff') format('woff');
 }
 
 @font-face {
+  font-display: swap;
   font-family: 'Open Sans';
-  src: url('open_sans_700.woff') format('woff');
   font-weight: 700;
+  src: url('open_sans_700.woff') format('woff');
 }
 
 :root {
@@ -168,6 +170,7 @@ button:disabled {
 
 .inline-between {
   justify-content: space-between;
+  width: 100%;
 }
 
 [hidden],

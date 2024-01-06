@@ -1,7 +1,5 @@
 import { createApp } from './petite-vue.es.js'
 
-const serverUrl = 'ws://192.168.1.2:8090'
-
 function Dashboard(props) {
   return {
     busyLevel: 5,
@@ -40,7 +38,11 @@ function Dashboard(props) {
       }, 1000)
     },
     initWebsocket() {
-      this.socket = new WebSocket(serverUrl)
+      this.socket = new WebSocket(
+        `${window.location.protocol === 'https:' ? 'wss://' : 'ws://'}${
+          window.location.host
+        }`
+      )
 
       this.socket.addEventListener('open', (event) => {
         console.log('WebSocket connection opened:', event)
@@ -52,14 +54,6 @@ function Dashboard(props) {
           this.patients = data.patients
           this.updateState()
         }
-      })
-
-      this.socket.addEventListener('close', (event) => {
-        console.log(
-          event.wasClean
-            ? `WebSocket connection closed cleanly, code=${event.code}, reason=${event.reason}`
-            : 'WebSocket connection closed abruptly'
-        )
       })
     },
     formatTime(time, showSeconds = false) {
